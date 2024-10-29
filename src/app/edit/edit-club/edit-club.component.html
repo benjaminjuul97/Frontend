@@ -1,0 +1,41 @@
+<p>edit-club {{id}}</p>
+
+<div>
+    id: <input type="text" [(ngModel)]="club.id">
+</div>
+<div>
+    Club name: <input type="text" [(ngModel)]="club.cname" required #cname="ngModel">
+    @if(cname.invalid){
+        <span>Name must be provided</span>
+    }
+</div>
+<div>
+    League id: <input type="text" [(ngModel)]="club.leagueid" required pattern="\d+" minlength="1" maxlength="2" #leagueid="ngModel">
+    @if(leagueid.errors?.['required']){
+        <div>League id is required</div>
+    }
+    @if(leagueid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Manager id: <input type="text" [(ngModel)]="club.managerid" required pattern="\d+" minlength="1" maxlength="2" #managerid="ngModel">
+    @if(managerid.errors?.['required']){
+        <div>Manager id is required</div>
+    }
+    @if(managerid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Stadium id: <input type="text" [(ngModel)]="club.stadiumid" required pattern="\d+" minlength="1" maxlength="2" #stadiumid="ngModel">
+    @if(stadiumid.errors?.['required']){
+        <div>Stadium id is required</div>
+    }
+    @if(stadiumid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+@if(cname.invalid || leagueid.invalid || managerid.invalid || stadiumid.invalid) {
+<button (click)="updateClub()">Update</button>
+}

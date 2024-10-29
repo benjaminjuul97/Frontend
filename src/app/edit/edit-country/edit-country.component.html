@@ -1,0 +1,17 @@
+<p>edit-country {{id}}</p>
+
+<div>
+    id: <span>{{country.id}}</span>
+</div>
+<div>
+    id: <input type="text" [(ngModel)]="club.id">
+</div>
+<div>
+    Country name: <input type="text" [(ngModel)]="country.cname" required #cname="ngModel">
+    @if(cname.invalid){
+        <span>Name must be provided</span>
+    }
+</div>
+@if(cname.invalid) {
+<button (click)="updateCountry()">Update</button>
+}

@@ -1,0 +1,66 @@
+<p>edit-transfer {{id}}</p>
+
+<div>
+    id: <span>{{transfer.fromclubid}}</span>
+</div>
+<div>
+    First name: <span>{{transfer.toclubid}}</span>
+</div>
+<div>
+    Transfer date: <span>{{transfer.transferdate}}</span>
+</div>
+<div>
+    Transfer fee: <span>{{transfer.transferfee}}</span>
+</div>
+<div>
+    Player id: <span>{{transfer.playerid}}</span>
+</div>
+
+<div>
+    id: <input type="text" [(ngModel)]="transfer.id">
+</div>
+<div>
+    From Club Id: <input type="text" [(ngModel)]="transfer.fromclubid" required pattern="\d+" minlength="1" maxlength="2" #fromclubid="ngModel">
+    @if(fromclubid.errors?.['required']){
+        <div>From club id is required</div>
+    }
+    @if(fromclubid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    To Club Id: <input type="text" [(ngModel)]="transfer.toclubid" required pattern="\d+" minlength="1" maxlength="2" #toclubid="ngModel">
+    @if(toclubid.errors?.['required']){
+        <div>To club id is required</div>
+    }
+    @if(toclubid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Transfer fee: <input type="text" [(ngModel)]="transfer.transferfee" required pattern="\d+" minlength="1" maxlength="2" #transferfee="ngModel">
+    @if(transferfee.errors?.['required']){
+        <div>Transfer fee is required</div>
+    }
+    @if(transferfee.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Transfer date: <input type="text" [(ngModel)]="transfer.transferdate" required #transferdate="ngModel">
+    @if(transferdate.invalid){
+        <span>Transfer date must be provided</span>
+    }
+</div>
+<div>
+    Player Id: <input type="text" [(ngModel)]="transfer.playerid" required pattern="\d+" minlength="1" maxlength="2" #playerid="ngModel">
+    @if(playerid.errors?.['required']){
+        <div>Player id is required</div>
+    }
+    @if(playerid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+@if(fromclubid.invalid || toclubid.invalid || transferfee.invalid || transferdate.invalid || playerid.invalid) {
+<button (click)="updateTransfer()">Update</button>
+}

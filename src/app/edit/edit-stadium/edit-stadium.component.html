@@ -1,0 +1,38 @@
+<p>edit-stadium {{id}}</p>
+
+<div>
+    id: <input type="text" [(ngModel)]="stadium.id">
+</div>
+<div>
+    Name: <input type="text" [(ngModel)]="stadium.sname" required #sname="ngModel">
+    @if(sname.invalid){
+        <span>Name must be provided</span>
+    }
+</div>
+<div>
+    Location: <input type="text" [(ngModel)]="stadium.slocation" required #slocation="ngModel">
+    @if(slocation.invalid){
+        <span>Location must be provided</span>
+    }
+</div>
+<div>
+    Capacity: <input type="text" [(ngModel)]="stadium.capacity" required pattern="\d+" minlength="1" maxlength="2" #capacity="ngModel">
+    @if(capacity.errors?.['required']){
+        <div>Capacity is required</div>
+    }
+    @if(capacity.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Club id: <input type="text" [(ngModel)]="stadium.clubid" required pattern="\d+" minlength="1" maxlength="2" #clubid="ngModel">
+    @if(clubid.errors?.['required']){
+        <div>Club id is required</div>
+    }
+    @if(clubid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+@if(sname.invalid || slocation.invalid || capacity.invalid || clubid.invalid) {
+<button (click)="updateStadium()">Update</button>
+}

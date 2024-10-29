@@ -1,0 +1,17 @@
+<p>edit-league {{id}}</p>
+
+<div>
+    id: <span>{{league.id}}</span>
+</div>
+<div>
+    id: <input type="text" [(ngModel)]="league.id">
+</div>
+<div>
+    League name: <input type="text" [(ngModel)]="league.lname" required #lname="ngModel">
+    @if(lname.invalid){
+        <span>League name must be provided</span>
+    }
+</div>
+@if(lname.invalid) {
+<button (click)="updateLeague()">Update</button>
+}

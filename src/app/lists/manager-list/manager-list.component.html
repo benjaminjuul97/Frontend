@@ -1,0 +1,6 @@
+<h1 class="text-center">Managers</h1>
+<div class="grid grid-cols-4 gap-4">
+@for (manager of managers; track $index){
+    <app-manager [manager]="manager"></app-manager>
+}
+</div>

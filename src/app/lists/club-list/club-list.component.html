@@ -1,0 +1,6 @@
+<h1 class="text-center">Clubs</h1>
+<div class="grid grid-cols-4 gap-4">
+@for (club of clubs; track $index){
+    <app-club [club]="club"></app-club>
+}
+</div>

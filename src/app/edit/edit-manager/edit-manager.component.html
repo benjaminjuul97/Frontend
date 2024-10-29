@@ -1,0 +1,56 @@
+<p>edit-manager {{id}}</p>
+
+<div>
+    id: <input type="text" [(ngModel)]="manager.id">
+</div>
+<div>
+    First name: <input type="text" [(ngModel)]="manager.firstname" required #firstname="ngModel">
+    @if(firstname.invalid){
+        <span>First name must be provided</span>
+    }
+</div>
+<div>
+    Last name: <input type="text" [(ngModel)]="manager.lastname" required #lastname="ngModel">
+    @if(lastname.invalid){
+        <span>Last name must be provided</span>
+    }
+</div>
+<div>
+    Age: <input type="text" [(ngModel)]="manager.age" required pattern="\d+" minlength="1" maxlength="2" #age="ngModel">
+    @if(age.errors?.['required']){
+        <div>Age is required</div>
+    }
+    @if(age.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Experience years: <input type="text" [(ngModel)]="manager.experienceyears" required pattern="\d+" minlength="1" maxlength="2" #experienceyears="ngModel">
+    @if(experienceyears.errors?.['required']){
+        <div>Manager id is required</div>
+    }
+    @if(experienceyears.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Country id: <input type="text" [(ngModel)]="manager.countryid" required pattern="\d+" minlength="1" maxlength="2" #countryid="ngModel">
+    @if(countryid.errors?.['required']){
+        <div>Country id is required</div>
+    }
+    @if(countryid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+<div>
+    Club id: <input type="text" [(ngModel)]="manager.clubid" required pattern="\d+" minlength="1" maxlength="2" #clubid="ngModel">
+    @if(clubid.errors?.['required']){
+        <div>Club id is required</div>
+    }
+    @if(clubid.errors?.['pattern']){
+        <div>Only digits</div>
+    }
+</div>
+@if(firstname.invalid || lastname.invalid || age.invalid || experienceyears.invalid || countryid.invalid || clubid.invalid) {
+<button (click)="updateManager()">Update</button>
+}

@@ -1,0 +1,6 @@
+<h1 class="text-center">Leagues</h1>
+<div class="grid grid-cols-4 gap-4">
+@for (league of leagues; track $index){
+    <app-league [league]="league"></app-league>
+}
+</div>
