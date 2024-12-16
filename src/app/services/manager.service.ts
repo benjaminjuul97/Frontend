@@ -12,24 +12,47 @@ export class ManagerService {
 
   constructor(private httpClient: HttpClient) { }
 
+  get authHeader(): string { return localStorage["headerValue"]; }
 
   getManagers(): Observable<Manager[]> {
-    return this.httpClient.get<Manager[]>(this.baseUrl + "/manager");
+    console.log("getManagers");
+    return this.httpClient.get<Manager[]>(this.baseUrl + "/manager", {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   getManager(id: number): Observable<Manager> {
-    return this.httpClient.get<Manager>(`${this.baseUrl}/manager/${id}`);
+    console.log("getManagers");
+    return this.httpClient.get<Manager>(`${this.baseUrl}/manager/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   createManager(manager: Manager): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/manager`, manager);
+    return this.httpClient.post(`${this.baseUrl}/manager`, manager, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   updateManager(manager: Manager): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/manager/`, manager);
+    return this.httpClient.put(`${this.baseUrl}/manager/`, manager, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   deleteManager(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/manager/${id}`);
+    return this.httpClient.delete(`${this.baseUrl}/manager/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 }

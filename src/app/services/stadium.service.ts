@@ -13,24 +13,46 @@ export class StadiumService {
 
   constructor(private httpClient: HttpClient) { }
 
+  get authHeader(): string { return localStorage["headerValue"]; }
 
   getStadiums(): Observable<Stadium[]> {
-    return this.httpClient.get<Stadium[]>(`${this.baseUrl}/stadium`);
+    console.log("getStadiums");
+    return this.httpClient.get<Stadium[]>(this.baseUrl + "/stadium", {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   getStadium(id: number): Observable<Stadium> {
-    return this.httpClient.get<Stadium>(`${this.baseUrl}/stadium/${id}`);
+    return this.httpClient.get<Stadium>(`${this.baseUrl}/stadium/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   createStadium(stadium: Stadium): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/stadium`, stadium);
+    return this.httpClient.post(`${this.baseUrl}/stadium`, stadium, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   updateStadium(stadium: Stadium): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/stadium/`, stadium);
+    return this.httpClient.put(`${this.baseUrl}/stadium/`, stadium, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   deleteStadium(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/stadium/${id}`);
+    return this.httpClient.delete(`${this.baseUrl}/stadium/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 }

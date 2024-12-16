@@ -1,15 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Player } from '../../model/player';
 import { PlayerService } from '../../services/player.service';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+
+import {MatSelectModule} from '@angular/material/select';
+import { MatLabel } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-edit-player',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatSelectModule,
+    MatLabel,
+    RouterModule
+  ],
   templateUrl: './edit-player.component.html',
-  styleUrl: './edit-player.component.css'
+  styleUrl: './edit-player.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditPlayerComponent implements OnInit {
 

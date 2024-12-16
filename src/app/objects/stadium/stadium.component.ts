@@ -17,7 +17,7 @@ export class StadiumComponent {
 
   @Input() stadium!: Stadium;
 
-  deleteStadium(stadium: Stadium): void {
+  deleteStadium(): void {
     this.stadiumService.deleteStadium(this.stadium.id).subscribe();
   }
 

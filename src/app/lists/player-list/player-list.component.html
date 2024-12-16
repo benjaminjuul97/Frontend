@@ -1,6 +1,21 @@
 <h1 class="text-center">Players</h1>
 <div class="grid grid-cols-4 gap-4">
-@for (player of players; track $index){
+@for (player of pagedPlayers; track $index){
     <app-player [player]="player"></app-player>
 }
+</div>
+
+
+<div class="flex justify-center mt-4">
+    <mat-paginator [length]="players.length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[8, 16, 24]"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+
+  <div class="example-button-container">
+    <button mat-mini-fab aria-label="Example icon button with a home icon" routerLink="/add-player">
+      <mat-icon>+</mat-icon>
+    </button>
 </div>

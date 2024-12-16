@@ -11,24 +11,47 @@ export class ClubService {
 
   constructor(private httpClient: HttpClient) { }
 
+  get authHeader(): string { return localStorage["headerValue"]; }
+
 
   getClubs(): Observable<Club[]> {
-    return this.httpClient.get<Club[]>(this.baseUrl + "/club");
+    console.log("getClubs");
+    return this.httpClient.get<Club[]>(this.baseUrl + "/club", {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   getClub(id: number): Observable<Club> {
-    return this.httpClient.get<Club>(`${this.baseUrl}/club/${id}`);
+    return this.httpClient.get<Club>(`${this.baseUrl}/club/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   createClub(club: Club): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/club`, club);
+    return this.httpClient.post(`${this.baseUrl}/club`, club, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   updateClub(club: Club): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/club/`, club);
+    return this.httpClient.put(`${this.baseUrl}/club/`, club, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   deleteClub(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/club/${id}`);
+    return this.httpClient.delete(`${this.baseUrl}/club/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 }

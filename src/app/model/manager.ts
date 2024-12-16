@@ -6,4 +6,5 @@ export interface Manager {
     experienceyears: number;
     countryid: number;
     clubid: number
+    image: string;
 }

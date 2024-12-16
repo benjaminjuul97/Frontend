@@ -1,1 +1,25 @@
-<p>add-league works!</p>
+<div class="example-button-row">
+    <button mat-button routerLink="/league">←</button>
+</div>
+<div class="form-container">
+    <h1>Add League</h1>
+<form [formGroup]="leagueFormGroup">
+    <!-- <mat-form-field>
+        <mat-label>Id</mat-label>
+        <input matInput type="text" [formControl]="id">
+    </mat-form-field><br/> -->
+    <mat-form-field>
+        <mat-label>League name</mat-label>
+        <input matInput type="text" [formControl]="lname">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>Country ID</mat-label>
+        <input matInput type="text" [formControl]="countryid">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>Logo</mat-label>
+        <input matInput type="text" [formControl]="logo">
+    </mat-form-field><br/>
+    <button mat-raised-button color="primary" color="primary" (click)="addLeague()">Add League</button>
+</form>
+</div>

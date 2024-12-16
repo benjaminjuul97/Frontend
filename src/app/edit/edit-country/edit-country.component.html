@@ -1,17 +1,34 @@
-<p>edit-country {{id}}</p>
+<div class="example-button-row">
+  <button mat-button routerLink="/country">←</button>
+</div>
+<div class="form-container">
+  <h1>Edit Country</h1>
+@if(country) {
+    <form #formEditCountry="ngForm">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="country.id">
+    </mat-form-field>
 
-<div>
-    id: <span>{{country.id}}</span>
-</div>
-<div>
-    id: <input type="text" [(ngModel)]="club.id">
-</div>
-<div>
-    Country name: <input type="text" [(ngModel)]="country.cname" required #cname="ngModel">
-    @if(cname.invalid){
-        <span>Name must be provided</span>
-    }
-</div>
-@if(cname.invalid) {
-<button (click)="updateCountry()">Update</button>
+    <mat-form-field>
+      <mat-label>Country name</mat-label>
+      <input matInput [(ngModel)]="country.cname" required #cname="ngModel" name="cname">
+      @if(cname.invalid){
+        <span style="background-color: red;">Country name must be provided</span>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Flag</mat-label>
+      <input matInput [(ngModel)]="country.flag" required #flag="ngModel" name="flag">
+    </mat-form-field>
+
+</form>
+@if(formEditCountry.valid) {
+  <button mat-raised-button color="primary" (click)="updateCountry()">Update Country</button>
 }
+}
+@else {
+  Loading...
+}
+</div>

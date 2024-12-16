@@ -1,117 +1,55 @@
-<!-- <p>edit-player {{id}}</p>
 
-<div>
-    id: <input type="text" [(ngModel)]="player.id">
-</div>
-<div>
-    First name: <input type="text" [(ngModel)]="player.firstname" required #firstname="ngModel">
-    @if(firstname.invalid){
-        <span>First name must be provided</span>
-    }
-</div>
-<div>
-    Last name: <input type="text" [(ngModel)]="player.lastname" required #lastname="ngModel">
-    @if(lastname.invalid){
-        <span>Last name must be provided</span>
-    }
-</div>
-<div>
-    Age: <input type="text" [(ngModel)]="player.age" required pattern="\d+" minlength="1" maxlength="2" #age="ngModel">
-    @if(age.errors?.['required']){
-        <div>Age is required</div>
-    }
-    @if(age.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-<div>
-    Position: <input type="text" [(ngModel)]="player.pposition" required #pposition="ngModel">
-    @if(pposition.invalid){
-        <span>Position must be provided</span>
-    }
-</div>
-<div>
-    Club id: <input type="text" [(ngModel)]="player.clubid" required pattern="\d+" minlength="1" maxlength="2" #clubid="ngModel">
-    @if(clubid.errors?.['required']){
-        <div>Club id is required</div>
-    }
-    @if(clubid.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-<div>
-    Country id: <input type="text" [(ngModel)]="player.countryid" required pattern="\d+" minlength="1" maxlength="2" #countryid="ngModel">
-    @if(countryid.errors?.['required']){
-        <div>Country id is required</div>
-    }
-    @if(countryid.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-@if(firstname.invalid || lastname.invalid || age.invalid || pposition.invalid || clubid.invalid || countryid.invalid) {
-<button (click)="updatePlayer()">Update</button>
-} -->
+  <div class="example-button-row">
+    <button mat-button routerLink="/player">←</button>
+  </div>
+  <div class="form-container">
+    <h1>Edit Player</h1>
+    <form #formEditPlayer="ngForm">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="player.id">
+    </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput [(ngModel)]="player.firstname" required #firstname="ngModel" name="firstname">
+      @if(firstname.invalid){
+        <span style="background-color: red;">First name must be provided</span>
+      }
+    </mat-form-field>
 
-<form class="w-full max-w-lg">
-    <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-          First Name
-        </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" [(ngModel)]="player.firstname" required #firstname="ngModel">
-          @if(firstname.invalid){
-              <span>First name must be provided</span>
-              <p class="text-red-500 text-xs italic">Please fill out this field.</p>
-          }
-      </div>
-      <div class="w-full md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-          Last Name
-        </label>
-        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" [(ngModel)]="player.lastname" required #lastname="ngModel">
-          @if(lastname.invalid){
-              <span>Last name must be provided</span>
-              <p class="text-red-500 text-xs italic">Please fill out this field.</p>
-          }
-      </div>
-    </div>
-    <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full px-3">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-          Password
-        </label>
-        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************">
-        <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-      </div>
-    </div>
-    <div class="flex flex-wrap -mx-3 mb-2">
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-          City
-        </label>
-        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Albuquerque">
-      </div>
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-          State
-        </label>
-        <div class="relative">
-          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-            <option>New Mexico</option>
-            <option>Missouri</option>
-            <option>Texas</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div>
-        </div>
-      </div>
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-          Zip
-        </label>
-        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="90210">
-      </div>
-    </div>
-  </form>
+    <mat-form-field>
+      <mat-label>Lastname</mat-label>
+      <input matInput [(ngModel)]="player.lastname" required #lastname="ngModel" name="lastname">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput [(ngModel)]="player.age" required #age="ngModel" name="age">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Position</mat-label>
+      <input matInput [(ngModel)]="player.pposition" required #pposition="ngModel" name="pposition">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Club ID</mat-label>
+      <input matInput [(ngModel)]="player.clubid" required #clubid="ngModel" name="clubid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country ID</mat-label>
+      <input matInput [(ngModel)]="player.countryid" required #countryid="ngModel" name="countryid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Image</mat-label>
+      <input matInput [(ngModel)]="player.image" required #image="ngModel" name="image">
+    </mat-form-field>
+
+</form>
+@if(formEditPlayer.valid) {
+  <button mat-raised-button color="primary" (click)="updatePlayer()">Update Player</button>
+}
+</div>

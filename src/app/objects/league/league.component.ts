@@ -17,7 +17,7 @@ export class LeagueComponent {
 
   @Input() league!: League;
 
-  deleteLeague(league: League): void {
+  deleteLeague(): void {
     this.leagueService.deleteLeague(this.league.id).subscribe();
   }
 

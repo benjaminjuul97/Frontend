@@ -5,4 +5,5 @@ export interface Transfer {
     transferdate: Date;
     transferfee: number;
     playerid: number;
+    loan: boolean;
 }

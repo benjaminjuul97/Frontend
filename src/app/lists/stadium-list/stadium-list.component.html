@@ -1,3 +1,22 @@
-@for (stadium of stadiums; track $index){
+<h1 class="text-center">Stadiums</h1>
+<div class="grid grid-cols-4 gap-4">
+@for (stadium of pagedStadiums; track $index){
     <app-stadium [stadium]="stadium"></app-stadium>
 }
+</div>
+
+
+<div class="flex justify-center mt-4">
+    <mat-paginator [length]="stadiums.length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[8, 16, 24]"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+
+  <div class="example-button-container">
+    <button mat-mini-fab aria-label="Example icon button with a home icon" routerLink="/add-stadium">
+      <mat-icon>+</mat-icon>
+    </button>
+</div>
+  

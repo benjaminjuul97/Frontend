@@ -1,17 +1,39 @@
-<p>edit-league {{id}}</p>
+<div class="example-button-row">
+  <button mat-button routerLink="/league">←</button>
+</div>
+<div class="form-container">
+  <h1>Edit League</h1>
+@if(league) {
+    <form #formEditLeague="ngForm">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="league.id">
+    </mat-form-field>
 
-<div>
-    id: <span>{{league.id}}</span>
-</div>
-<div>
-    id: <input type="text" [(ngModel)]="league.id">
-</div>
-<div>
-    League name: <input type="text" [(ngModel)]="league.lname" required #lname="ngModel">
-    @if(lname.invalid){
-        <span>League name must be provided</span>
-    }
-</div>
-@if(lname.invalid) {
-<button (click)="updateLeague()">Update</button>
+    <mat-form-field>
+      <mat-label>League name</mat-label>
+      <input matInput [(ngModel)]="league.lname" required #lname="ngModel" name="lname">
+      @if(lname.invalid){
+        <span style="background-color: red;">League name must be provided</span>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country ID</mat-label>
+      <input matInput [(ngModel)]="league.countryid" required #countryid="ngModel" name="countryid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Logo</mat-label>
+      <input matInput file="file" [(ngModel)]="league.logo" required #logo="ngModel" name="logo">
+    </mat-form-field>
+
+</form>
+@if(formEditLeague.valid) {
+  <button mat-raised-button color="primary" (click)="updateLeague()">Update League</button>
 }
+}
+@else {
+  Loading...
+}
+</div>

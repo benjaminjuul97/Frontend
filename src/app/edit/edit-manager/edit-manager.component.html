@@ -1,4 +1,4 @@
-<p>edit-manager {{id}}</p>
+<!-- <p>edit-manager {{id}}</p>
 
 <div>
     id: <input type="text" [(ngModel)]="manager.id">
@@ -53,4 +53,64 @@
 </div>
 @if(firstname.invalid || lastname.invalid || age.invalid || experienceyears.invalid || countryid.invalid || clubid.invalid) {
 <button (click)="updateManager()">Update</button>
+} -->
+<div class="example-button-row">
+    <button mat-button routerLink="/manager">←</button>
+</div>
+<div class="form-container">
+    <h1>Edit Manager</h1>
+@if(manager) {
+    <form #formEditManager="ngForm">
+    <mat-form-field>
+      <mat-label>Manager Id</mat-label>
+      <input matInput [(ngModel)]="manager.id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput [(ngModel)]="manager.firstname" required #firstname="ngModel" name="firstname">
+      @if(firstname.invalid){
+        <span style="background-color: red;">First name must be provided</span>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input matInput [(ngModel)]="manager.lastname" required #lastname="ngModel" name="lastname">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput [(ngModel)]="manager.age" required #age="ngModel" name="age">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Experience Years</mat-label>
+      <input matInput [(ngModel)]="manager.experienceyears" required #experienceyears="ngModel" name="experienceyears">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country ID</mat-label>
+      <input matInput [(ngModel)]="manager.countryid" required #countryid="ngModel" name="countryid">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Club ID</mat-label>
+        <input matInput [(ngModel)]="manager.clubid" required #clubid="ngModel" name="clubid">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Image</mat-label>
+        <input matInput [(ngModel)]="manager.image" required #image="ngModel" name="image">
+    </mat-form-field>
+
+
+</form>
+@if(formEditManager.valid) {
+  <button mat-raised-button color="primary" (click)="updateManager()">Update Manager</button>
 }
+}
+@else {
+  Loading...
+}
+</div>

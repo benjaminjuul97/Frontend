@@ -11,19 +11,33 @@ import { ManagerListComponent } from './lists/./manager-list/manager-list.compon
 import { EditManagerComponent } from './edit/edit-manager/edit-manager.component';
 import { LeagueListComponent } from './lists/league-list/league-list.component';
 import { EditLeagueComponent } from './edit/./edit-league/edit-league.component';
+import { LoginComponent } from './objects/login/login.component';
+import { AddPlayerComponent } from './add/add-player/add-player.component';
+import { AddClubComponent } from './add/add-club/add-club.component';
+import { AddLeagueComponent } from './add/add-league/add-league.component';
+import { AddManagerComponent } from './add/add-manager/add-manager.component';
+import { AddStadiumComponent } from './add/add-stadium/add-stadium.component';
+import { AddTransferComponent } from './add/add-transfer/add-transfer.component';
 
 export const routes: Routes = [
     { path: 'player', component: PlayerListComponent },
+    { path: 'add-player', component: AddPlayerComponent},
     { path: 'edit-player/:id', component: EditPlayerComponent},
     // { path: '', component: PlayerListComponent },
     { path: 'club', component: ClubListComponent},
-    { path: 'edit/club/:id', component: EditClubComponent},
+    { path: 'add-club', component: AddClubComponent},
+    { path: 'edit-club/:id', component: EditClubComponent},
     { path: 'league', component: LeagueListComponent},
-    { path: 'edit/league/:id', component: EditLeagueComponent},
+    { path: 'add-league', component: AddLeagueComponent},
+    { path: 'edit-league/:id', component: EditLeagueComponent},
     { path: 'manager', component: ManagerListComponent},
-    { path: 'edit/manager/:id', component: EditManagerComponent},
+    { path: 'add-manager', component: AddManagerComponent},
+    { path: 'edit-manager/:id', component: EditManagerComponent},
     { path: 'stadium', component: StadiumListComponent},
-    { path: 'edit/stadium/:id', component: EditStadiumComponent},
+    { path: 'add-stadium', component: AddStadiumComponent},
+    { path: 'edit-stadium/:id', component: EditStadiumComponent},
     { path: 'transfer', component: TransferListComponent},
-    { path: 'edit/transfer/:id', component: EditTransferComponent},
+    { path: 'add-transfer', component: AddTransferComponent},
+    { path: 'edit-transfer/:id', component: EditTransferComponent},
+    { path: 'login', component: LoginComponent}
     ];

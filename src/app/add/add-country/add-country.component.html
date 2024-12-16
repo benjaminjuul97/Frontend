@@ -1,1 +1,21 @@
-<p>add-country works!</p>
+<div class="example-button-row">
+    <button mat-button routerLink="/country">←</button>
+</div>
+<div class="form-container">
+    <h1>Add Country</h1>
+<form [formGroup]="countryFormGroup">
+    <!-- <mat-form-field>
+        <mat-label>Id</mat-label>
+        <input matInput type="text" [formControl]="id">
+    </mat-form-field><br/> -->
+    <mat-form-field>
+        <mat-label>Country name</mat-label>
+        <input matInput type="text" [formControl]="cname">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>Flag</mat-label>
+        <input matInput type="text" [formControl]="flag">
+    </mat-form-field><br/>
+    <button mat-raised-button (click)="addCountry()">Add Country</button>
+</form>
+</div>

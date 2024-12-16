@@ -1,14 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Stadium } from '../../model/stadium';
 import { StadiumService } from '../../services/stadium.service';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-edit-stadium',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, RouterModule],
   templateUrl: './edit-stadium.component.html',
   styleUrl: './edit-stadium.component.css'
 })

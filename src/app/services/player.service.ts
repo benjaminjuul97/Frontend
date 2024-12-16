@@ -11,25 +11,48 @@ export class PlayerService {
 
   constructor(private httpClient: HttpClient) { }
 
+  get authHeader(): string { return localStorage["headerValue"]; }
+
 
   getPlayers(): Observable<Player[]> {
     console.log("getPlayers");
-    return this.httpClient.get<Player[]>(this.baseUrl + "/player");
+    return this.httpClient.get<Player[]>(this.baseUrl + "/player", {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   getPlayer(id: number): Observable<Player> {
-    return this.httpClient.get<Player>(`${this.baseUrl}/player/${id}`);
+    return this.httpClient.get<Player>(`${this.baseUrl}/player/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   createPlayer(player: Player): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/player`, player);
+    return this.httpClient.post(`${this.baseUrl}/player`, player, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   updatePlayer(player: Player): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}/player/`, player);
+    return this.httpClient.put(`${this.baseUrl}/player/`, player, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
 
   deletePlayer(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/player/${id}`);
+    return this.httpClient.delete(`${this.baseUrl}/player/${id}`, {
+      headers: {
+        "Authorization": this.authHeader
+      }
+    });
   }
+
 }

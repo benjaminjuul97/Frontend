@@ -13,6 +13,13 @@ import { TransferListComponent } from './lists/transfer-list/transfer-list.compo
 import { StadiumComponent } from './objects/stadium/stadium.component';
 import { StadiumListComponent } from './lists/stadium-list/stadium-list.component';
 
+// Material components
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 @Component({
   selector: 'app-root',
@@ -31,7 +38,12 @@ import { StadiumListComponent } from './lists/stadium-list/stadium-list.componen
     TransferComponent,
     TransferListComponent,
     StadiumComponent,
-    StadiumListComponent
+    StadiumListComponent,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatTabsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

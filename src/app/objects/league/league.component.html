@@ -1,4 +1,4 @@
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
+<!-- <div class="max-w-sm rounded overflow-hidden shadow-lg">
     <img class="w-50" [src]="'assets/svg/' + league.logo" alt="{{ league.lname }}">
     <span (click)="editLeague(league.id)">Edit</span>
     <div class="px-6 py-4">
@@ -12,4 +12,31 @@
       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"></span>
       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"></span>
     </div>
-  </div>
+  </div> -->
+
+  <mat-card class="example-card" appearance="outlined">
+    <div class="top-right-actions">
+      <span (click)="deleteLeague()" class="action-icon delete-icon">
+        <i class="fa-solid fa-trash-can"></i>
+      </span>
+      <span (click)="editLeague(league.id)" class="action-icon edit-icon">
+        <i class="fa-solid fa-pen"></i>
+      </span>
+    </div>
+  
+    <div class="image-container">
+      <img mat-card-image [src]="'assets/svg/' + league.logo" alt="{{ league.logo }}" />
+    </div>
+  
+    <mat-card-content>
+      <p>{{league.id}} {{league.lname}}</p>
+      <p>{{league.countryid}}</p>
+      <!-- <p>{{player.pposition}}</p> -->
+    </mat-card-content>
+  
+    <mat-card-actions>
+      <!-- <button mat-button>Club: <img style="height: 30px" [src]="'assets/svg/' + player.logo" alt="{{ player.logo }}"></button> -->
+      <!-- <button mat-button>Country: <img style="height: 30px" [src]="'assets/svg/' + player.flag" alt="{{ player.flag }}"></button> -->
+    </mat-card-actions>
+  </mat-card>
+  

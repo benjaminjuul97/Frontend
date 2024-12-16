@@ -1,4 +1,4 @@
-<p>edit-club {{id}}</p>
+<!-- <p>edit-club {{id}}</p>
 
 <div>
     id: <input type="text" [(ngModel)]="club.id">
@@ -38,4 +38,53 @@
 </div>
 @if(cname.invalid || leagueid.invalid || managerid.invalid || stadiumid.invalid) {
 <button (click)="updateClub()">Update</button>
+} -->
+<div class="example-button-row">
+  <button mat-stroked-button routerLink="/club">←</button>
+</div>
+<div class="form-container">
+  <h1>Edit Club</h1>
+@if(club) {
+    <form #formEditClub="ngForm">
+    <mat-form-field>
+      <mat-label>Club ID</mat-label>
+      <input matInput [(ngModel)]="club.id" required #id="ngModel" name="id">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Club name</mat-label>
+      <input matInput [(ngModel)]="club.cname" required #cname="ngModel" name="cname">
+      @if(cname.invalid){
+        <span style="background-color: red;">Club name must be provided</span>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>League ID</mat-label>
+      <input matInput [(ngModel)]="club.leagueid" required #leagueid="ngModel" name="leagueid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Manager ID</mat-label>
+      <input matInput [(ngModel)]="club.managerid" required #managerid="ngModel" name="managerid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Stadium ID</mat-label>
+      <input matInput [(ngModel)]="club.stadiumid" required #stadiumid="ngModel" name="stadiumid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Logo</mat-label>
+      <input matInput [(ngModel)]="club.logo" required #logo="ngModel" name="logo">
+    </mat-form-field>
+
+</form>
+@if(formEditClub.valid) {
+  <button mat-raised-button color="primary" (click)="updateClub()">Update Club</button>
 }
+}
+@else {
+  Loading...
+}
+</div>

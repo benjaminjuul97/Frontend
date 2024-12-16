@@ -2,12 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Club } from '../../model/club';
 import { ClubService } from '../../services/club.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-edit-club',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, RouterModule],
   templateUrl: './edit-club.component.html',
   styleUrl: './edit-club.component.css'
 })

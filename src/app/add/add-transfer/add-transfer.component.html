@@ -1,1 +1,38 @@
-<p>add-transfer works!</p>
+<div class="example-button-row">
+    <button mat-button routerLink="/transfer">←</button>
+</div>
+<div class="form-container">
+    <h1>Add Transfer</h1>
+<form [formGroup]="transferFormGroup">
+    <!-- <mat-form-field>
+        <mat-label>Transfer Id</mat-label>
+        <input matInput type="text" [formControl]="id">
+    </mat-form-field><br/> -->
+    <mat-form-field>
+        <mat-label>Transfer fee</mat-label>
+        <input matInput type="text" [formControl]="transferfee">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>Transfer date</mat-label>
+        <input matInput type="text" [formControl]="transferdate">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>To Club ID</mat-label>
+        <input matInput type="text" [formControl]="toclubid">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>From Club ID</mat-label>
+        <input matInput type="text" [formControl]="fromclubid">
+    </mat-form-field><br/>
+    <mat-form-field>
+        <mat-label>Player ID</mat-label>
+        <input matInput type="text" [formControl]="playerid">
+    </mat-form-field><br/>
+    
+    <!-- <mat-slide-toggle [(ngModel)]="transfer.loan" required #loan="ngModel" name="loan">
+        Loan
+    </mat-slide-toggle> -->
+    
+    <button mat-raised-button color="primary" (click)="addTransfer()">Add Transfer</button>
+</form>
+</div>

@@ -1,38 +1,102 @@
-<p>edit-stadium {{id}}</p>
+<!-- <div class="example-button-row">
+  <button mat-button routerLink="/league">←</button>
+</div>
+<div class="form-container">
+  <h1>Edit Stadium</h1>
+@if(stadium) {
+    <form #formEditStadium="ngForm">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="stadium.id">
+    </mat-form-field>
 
-<div>
-    id: <input type="text" [(ngModel)]="stadium.id">
-</div>
-<div>
-    Name: <input type="text" [(ngModel)]="stadium.sname" required #sname="ngModel">
-    @if(sname.invalid){
-        <span>Name must be provided</span>
-    }
-</div>
-<div>
-    Location: <input type="text" [(ngModel)]="stadium.slocation" required #slocation="ngModel">
-    @if(slocation.invalid){
-        <span>Location must be provided</span>
-    }
-</div>
-<div>
-    Capacity: <input type="text" [(ngModel)]="stadium.capacity" required pattern="\d+" minlength="1" maxlength="2" #capacity="ngModel">
-    @if(capacity.errors?.['required']){
-        <div>Capacity is required</div>
-    }
-    @if(capacity.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-<div>
-    Club id: <input type="text" [(ngModel)]="stadium.clubid" required pattern="\d+" minlength="1" maxlength="2" #clubid="ngModel">
-    @if(clubid.errors?.['required']){
-        <div>Club id is required</div>
-    }
-    @if(clubid.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-@if(sname.invalid || slocation.invalid || capacity.invalid || clubid.invalid) {
-<button (click)="updateStadium()">Update</button>
+    <mat-form-field>
+      <mat-label>Stadium name</mat-label>
+      <input matInput [(ngModel)]="stadium.sname" required #sname="ngModel" name="sname">
+      @if(sname.invalid){
+        <span style="background-color: red;">Stadium name must be provided</span>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input matInput [(ngModel)]="stadium.slocation" required #slocation="ngModel" name="slocation">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Capacity</mat-label>
+      <input matInput [(ngModel)]="stadium.capacity" required #capacity="ngModel" name="capacity">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Club ID</mat-label>
+      <input matInput [(ngModel)]="stadium.clubid" required #clubid="ngModel" name="clubid">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Image</mat-label>
+      <input matInput [(ngModel)]="stadium.image" required #image="ngModel" name="image">
+    </mat-form-field>
+
+</form>
+@if(formEditStadium.valid) {
+  <button mat-raised-button color="primary" (click)="updateStadium()">Update Stadium</button>
 }
+}
+@else {
+  Loading...
+}
+</div> -->
+<div class="example-button-row">
+  <button mat-button routerLink="/league">←</button>
+</div>
+<div class="form-container">
+  <h1>Edit Stadium</h1>
+  @if(stadium) {
+    <form #formEditStadium="ngForm">
+      <div class="form-grid">
+        <mat-form-field>
+          <mat-label>Id</mat-label>
+          <input matInput [(ngModel)]="stadium.id" name="id">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Stadium name</mat-label>
+          <input matInput [(ngModel)]="stadium.sname" required #sname="ngModel" name="sname">
+          @if(sname.invalid) {
+            <span class="error-text">Stadium name must be provided</span>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Location</mat-label>
+          <input matInput [(ngModel)]="stadium.slocation" required #slocation="ngModel" name="slocation">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Capacity</mat-label>
+          <input matInput [(ngModel)]="stadium.capacity" required #capacity="ngModel" name="capacity">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Club ID</mat-label>
+          <input matInput [(ngModel)]="stadium.clubid" required #clubid="ngModel" name="clubid">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Image</mat-label>
+          <input matInput [(ngModel)]="stadium.image" required #image="ngModel" name="image">
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        @if(formEditStadium.valid) {
+          <button mat-raised-button color="primary" (click)="updateStadium()">Update Stadium</button>
+        }
+      </div>
+    </form>
+  }
+  @else {
+    Loading...
+  }
+</div>

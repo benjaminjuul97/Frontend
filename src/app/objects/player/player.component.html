@@ -1,16 +1,25 @@
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
-  <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-  <img class="w-50" [src]="'assets/img/' + player.image" alt="{{ player.image }}">
-  <span (click)="editPlayer(player.id)">Edit</span>
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">{{player.id}}{{player.firstname}}{{player.lastname}}</div>
-    <p class="text-gray-700 text-base">
-      {{player.pposition}}
-    </p>
+<mat-card class="example-card" appearance="outlined">
+  <div class="top-right-actions">
+    <span (click)="deletePlayer()" class="action-icon delete-icon">
+      <i class="fa-solid fa-trash-can"></i>
+    </span>
+    <span (click)="editPlayer(player.id)" class="action-icon edit-icon">
+      <i class="fa-solid fa-pen"></i>
+    </span>
   </div>
-  <div class="px-6 pt-4 pb-2">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Age: {{player.age}}</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Club: <span><img style="height: 30px" [src]="'assets/svg/' + player.logo" alt="{{ player.logo }}"></span></span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Country: <img style="height: 30px" [src]="'assets/svg/' + player.flag" alt="{{ player.flag }}"></span>
+
+  <div class="image-container">
+    <img mat-card-image [src]="'assets/img/' + player.image" alt="{{ player.image }}" />
   </div>
-</div>
+
+  <mat-card-content>
+    <p>{{player.firstname}} {{player.lastname}}</p>
+    <p>{{player.age}}</p>
+    <p>{{player.pposition}}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button>Club: <img style="height: 30px" [src]="'assets/svg/' + player.logo" alt="{{ player.logo }}"></button>
+    <button mat-button>Country: <img style="height: 30px" [src]="'assets/svg/' + player.flag" alt="{{ player.flag }}"></button>
+  </mat-card-actions>
+</mat-card>
