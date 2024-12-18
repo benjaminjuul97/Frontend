@@ -22,11 +22,11 @@ export class AddStadiumComponent {
 
   constructor(private stadiumService: StadiumService, private router: RouterModule) {}
 
-  sname: FormControl = new FormControl('', [Validators.required]);
-  slocation: FormControl = new FormControl('', [Validators.required]);
+  sname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
+  slocation: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
   capacity: FormControl = new FormControl('', [Validators.required]);
   clubid: FormControl = new FormControl('', [Validators.required]);
-  image: FormControl = new FormControl('', [Validators.required]);
+  image: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.png$')]);
 
   stadiumFormGroup: FormGroup = new FormGroup({
     sname: this.sname.value,

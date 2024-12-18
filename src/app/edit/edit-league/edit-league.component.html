@@ -3,37 +3,41 @@
 </div>
 <div class="form-container">
   <h1>Edit League</h1>
-@if(league) {
-    <form #formEditLeague="ngForm">
-    <mat-form-field>
-      <mat-label>Id</mat-label>
-      <input matInput [(ngModel)]="league.id">
-    </mat-form-field>
-
+    <form [formGroup]="leagueEditFormGroup">
+      <div class="form-grid">
     <mat-form-field>
       <mat-label>League name</mat-label>
-      <input matInput [(ngModel)]="league.lname" required #lname="ngModel" name="lname">
-      @if(lname.invalid){
-        <span style="background-color: red;">League name must be provided</span>
+      <input matInput type="text" [formControl]="lname"  required [(ngModel)]="league.lname" name="lname">
+      @if(lname.errors?.['pattern']) {
+        <mat-error>Not a valid league name</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Country ID</mat-label>
-      <input matInput [(ngModel)]="league.countryid" required #countryid="ngModel" name="countryid">
+      <input matInput type="text" [formControl]="countryid" required [(ngModel)]="league.countryid" name="countryid" pattern="\d+" minlength="1" max-length="2">
+      @if(countryid.errors?.['required']) {
+        <mat-error>Country id is required</mat-error>
+      }
+      @if(countryid.errors?.['pattern']) {
+        <mat-error>Only digits</mat-error>
+      }
     </mat-form-field>
-
     <mat-form-field>
       <mat-label>Logo</mat-label>
-      <input matInput file="file" [(ngModel)]="league.logo" required #logo="ngModel" name="logo">
+      <input matInput type="text" [formControl]="logo" required [(ngModel)]="league.logo" name="logo">
+      @if(logo.errors?.['pattern']) {
+        <mat-error>Logo should be at least three characters and end on .svg</mat-error>
+      }
     </mat-form-field>
-
+    </div>
+    @if(lname.invalid || countryid.invalid || logo.invalid) {
+      <mat-error>Error in data</mat-error>
+  }
+  @else {
+  <div class="button-container">
+      <button mat-raised-button color="primary" (click)="updateLeague()">Add Update</button>
+  </div>
+  }
 </form>
-@if(formEditLeague.valid) {
-  <button mat-raised-button color="primary" (click)="updateLeague()">Update League</button>
-}
-}
-@else {
-  Loading...
-}
 </div>

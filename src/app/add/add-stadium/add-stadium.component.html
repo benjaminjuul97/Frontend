@@ -4,30 +4,56 @@
 <div class="form-container">
     <h1>Add Stadium</h1>
 <form [formGroup]="stadiumFormGroup">
-    <!-- <mat-form-field>
-        <mat-label>Stadium Id</mat-label>
-        <input matInput type="text" [formControl]="id">
-    </mat-form-field><br/> -->
+    <div class="form-grid">
     <mat-form-field>
         <mat-label>Stadium name</mat-label>
-        <input matInput type="text" [formControl]="sname">
+        <input matInput type="text" [formControl]="sname" required>
+        @if(sname.errors?.['pattern']) {
+            <mat-error>Not a valid stadium name</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Location</mat-label>
-        <input matInput type="text" [formControl]="slocation">
+        <input matInput type="text" [formControl]="slocation" required>
+        @if(slocation.errors?.['pattern']) {
+            <mat-error>Not a valid location name</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Capacity</mat-label>
-        <input matInput type="text" [formControl]="capacity">
+        <input matInput type="text" [formControl]="capacity" required pattern="\d+" minlength="1" max-length="10">
+        @if (capacity.errors?.['required']) {
+            <mat-error>Capacity is required</mat-error>
+        }
+        @if (capacity.errors?.['pattern']) {
+            <mat-error>Only digits</mat-error>
+        }
     </mat-form-field><br/>
         <mat-form-field>
             <mat-label>Club ID</mat-label>
-            <input matInput type="text" [formControl]="clubid">
+            <input matInput type="text" [formControl]="clubid" required pattern="\d+" minlength="1" max-length="2">
+            @if (clubid.errors?.['required']) {
+                <mat-error>Club Id is required</mat-error>
+            }
+            @if (clubid.errors?.['pattern']) {
+                <mat-error>Only digits</mat-error>
+            }
         </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Image</mat-label>
-        <input matInput type="text" [formControl]="image">
+        <input matInput type="text" [formControl]="image" required>
+        @if(image.errors?.['pattern']) {
+            <mat-error>Image should be at least three characters and end on .png</mat-error>
+        }
     </mat-form-field><br/>
-    <button mat-raised-button color="primary" (click)="addStadium()">Add Stadium</button>
+    </div>
+    @if(sname.invalid || slocation.invalid || capacity.invalid || clubid.invalid || image.invalid) {
+        <mat-error>Error in data</mat-error>
+    }
+    @else {
+    <div class="button-container">
+        <button mat-raised-button color="primary" (click)="addStadium()">Add Stadium</button>
+    </div>
+    }
 </form>
 </div>

@@ -1,3 +1,4 @@
+@if(authenticated) {
   <mat-tab-group disableRipple>
     <mat-tab>
       <ng-template mat-tab-label>
@@ -59,4 +60,12 @@
   </mat-tab-group>
   
 
+ <!-- Logout button -->
+ <button mat-raised-button color="warn" (click)="logout()" class="logout-button">
+  Logout
+</button>
+} @else {
+<span style="color: red; font-size: 18px;">You are not authenticated. Please log in.</span>
+}
 <router-outlet/>
+

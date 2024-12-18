@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LeagueService } from '../../services/league.service';
 import { Router, RouterModule } from '@angular/router';
 import { League } from '../../model/league';
@@ -13,7 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   selector: 'app-edit-league',
   standalone: true,
   imports: [
-    FormsModule, 
+    ReactiveFormsModule,
     MatFormFieldModule, 
     MatInputModule, 
     MatSelectModule,
@@ -29,6 +29,17 @@ export class EditLeagueComponent implements OnInit {
   league!: League;
 
   constructor(private leagueService: LeagueService, private router: Router) { }
+
+    lname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
+    countryid: FormControl = new FormControl('', [Validators.required]);
+    logo: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.svg$')]);
+  
+  
+    leagueEditFormGroup: FormGroup = new FormGroup({
+      lname: this.lname,
+      countryid: this.countryid,
+      logo: this.logo
+    });
 
   ngOnInit(): void {
     this.leagueService.getLeague(this.id).subscribe(league => {

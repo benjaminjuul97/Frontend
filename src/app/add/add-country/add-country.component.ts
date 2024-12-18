@@ -22,8 +22,8 @@ export class AddCountryComponent {
 
   constructor(private countryService: CountryService, private router: RouterModule) {}
 
-  cname: FormControl = new FormControl('', [Validators.required]);
-  flag: FormControl = new FormControl('', [Validators.required]);
+  cname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
+  flag: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.svg$')]);
 
   countryFormGroup: FormGroup = new FormGroup({
     cname: this.cname.value,

@@ -1,21 +1,41 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Manager } from '../../model/manager';
 import { ManagerService } from '../../services/manager.service';
 import { Router, RouterModule } from '@angular/router';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-edit-manager',
   standalone: true,
+  providers: [provideMomentDateAdapter(
+    {
+      parse: {
+        dateInput: ['DD-MM-YYYY'],
+      },
+      display: {
+        dateInput: 'DD-MM-YYYY',
+        monthYearLabel: 'MMM YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM YYYY'
+      },
+    },
+    { useUtc: true })
+  ],
   imports: [
-    FormsModule, 
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatButtonModule, 
     MatFormFieldModule, 
-    MatInputModule, 
-    MatSelectModule,
+    MatInputModule,
+    MatIcon, 
+    ReactiveFormsModule,
     RouterModule
   ],
   templateUrl: './edit-manager.component.html',
@@ -27,6 +47,24 @@ export class EditManagerComponent implements OnInit {
   manager!: Manager;
 
   constructor(private managerService: ManagerService, private router: Router) { }
+
+    firstname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')
+    ]);
+    lastname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')
+    ]);
+    countryid: FormControl = new FormControl('', [Validators.required]);
+    clubid: FormControl = new FormControl('', [Validators.required]);
+    image: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.png$')]);
+    dob: FormControl = new FormControl('', [Validators.required]);
+  
+    managerEditFormGroup: FormGroup = new FormGroup({
+      firstname: this.firstname,
+      lastname: this.lastname,
+      countryid: this.countryid,
+      clubid: this.clubid,
+      image: this.image,
+      dob: this.dob
+    });
 
   ngOnInit(): void {
     this.managerService.getManager(this.id).subscribe(manager => {

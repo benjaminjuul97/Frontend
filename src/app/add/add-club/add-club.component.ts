@@ -23,11 +23,12 @@ export class AddClubComponent {
 
   constructor(private clubService: ClubService) {}
 
-  cname: FormControl = new FormControl('', [Validators.required]);
+  cname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
   leagueid: FormControl = new FormControl('', [Validators.required]);
   managerid: FormControl = new FormControl('', [Validators.required]);
   stadiumid: FormControl = new FormControl('', [Validators.required]);
-  logo: FormControl = new FormControl('', [Validators.required]);
+  logo: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.svg$')
+  ]);
 
   clubFormGroup: FormGroup = new FormGroup({
     cname: this.cname.value,

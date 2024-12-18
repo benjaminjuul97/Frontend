@@ -4,38 +4,76 @@
 <div class="form-container">
     <h1>Add Player</h1>
 <form [formGroup]="playerFormGroup">
-    <!-- <mat-form-field>
-        <mat-label>Id</mat-label>
-        <input matInput type="text" [formControl]="id">
-    </mat-form-field><br/> -->
+    <div class="form-grid">
     <mat-form-field>
         <mat-label>First name</mat-label>
-        <input matInput type="text" [formControl]="firstname">
+        <input matInput type="text" [formControl]="firstname" required>
+        @if(firstname.errors?.['pattern']) {
+            <mat-error>Not a valid firstname</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Last name</mat-label>
-        <input matInput type="text" [formControl]="lastname">
+        <input matInput type="text" [formControl]="lastname" required>
+        @if(lastname.errors?.['pattern']) {
+            <mat-error>Not a valid lastname</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput type="text" [formControl]="age">
-    </mat-form-field><br/>
+        <mat-label>Dob</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="dob" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @if(dob.invalid) {
+            <mat-error>Not a valid date</mat-error>
+        }
+    </mat-form-field>
     <mat-form-field>
         <mat-label>Position</mat-label>
         <input matInput type="text" [formControl]="pposition">
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Club ID</mat-label>
-        <input matInput type="text" [formControl]="clubid">
+        <input matInput type="text" [formControl]="clubid" required pattern="\d+" minlength="1" max-length="2">
+        @if (clubid.errors?.['required']) {
+            <mat-error>Club Id is required</mat-error>
+        }
+        @if (clubid.errors?.['pattern']) {
+            <mat-error>Only digits</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Country ID</mat-label>
-        <input matInput type="text" [formControl]="countryid">
+        <input matInput type="text" [formControl]="countryid" required pattern="\d+" minlength="1" max-length="2">
+        @if (countryid.errors?.['required']) {
+            <mat-error>Country Id is required</mat-error>
+        }
+        @if (countryid.errors?.['pattern']) {
+            <mat-error>Only digits</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Image</mat-label>
-        <input matInput [formControl]="image">
+        <input matInput [formControl]="image" required>
+        @if(image.errors?.['pattern']) {
+            <mat-error>Image should be at least three characters and end on .png</mat-error>
+        }
     </mat-form-field><br/>
-    <button mat-raised-button color="primary" (click)="addPlayer()">Add Player</button>
+    </div>
+    @if(
+        firstname.invalid 
+        || lastname.invalid 
+        || dob.invalid 
+        || pposition.invalid
+        || clubid.invalid
+        || countryid.invalid
+        || image.invalid) {
+        <mat-error>Error in data</mat-error>
+    }
+    @else {
+    <div class="button-container">
+        <button mat-raised-button color="primary" (click)="addPlayer()">Add Player</button>
+    </div>
+    }
 </form>
 </div>

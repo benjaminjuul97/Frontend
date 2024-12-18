@@ -23,9 +23,9 @@ export class AddLeagueComponent {
 
   constructor(private leagueService: LeagueService, private router: RouterModule) {}
 
-  lname: FormControl = new FormControl('', [Validators.required]);
+  lname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
   countryid: FormControl = new FormControl('', [Validators.required]);
-  logo: FormControl = new FormControl('', [Validators.required]);
+  logo: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.svg$')]);
 
 
   leagueFormGroup: FormGroup = new FormGroup({

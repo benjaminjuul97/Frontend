@@ -3,6 +3,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { PlayerService } from '../../services/player.service';
 import { MatIcon } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -11,7 +13,23 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-add-player',
   standalone: true,
+  providers: [provideMomentDateAdapter(
+    {
+      parse: {
+        dateInput: ['DD-MM-YYYY'],
+      },
+      display: {
+        dateInput: 'DD-MM-YYYY',
+        monthYearLabel: 'MMM YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM YYYY'
+      },
+    },
+    { useUtc: true })
+  ],
   imports: [
+    MatDatepickerModule,
+    MatMomentDateModule,
     MatButtonModule, 
     MatFormFieldModule, 
     MatInputModule,
@@ -25,22 +43,22 @@ export class AddPlayerComponent {
 
   constructor(private playerService: PlayerService) {}
 
-  firstname: FormControl = new FormControl('', [Validators.required]);
-  lastname: FormControl = new FormControl('', [Validators.required]);
-  age: FormControl = new FormControl('', [Validators.required]);
-  pposition: FormControl = new FormControl('', [Validators.required]);
+  firstname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')]);
+  lastname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')]);
+  pposition: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')]);
   clubid: FormControl = new FormControl('', [Validators.required]);
   countryid: FormControl = new FormControl('', [Validators.required]);
-  image: FormControl = new FormControl('', [Validators.required]);
+  image: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9.-]+\\.png$')]);
+  dob: FormControl = new FormControl('', [Validators.required]);
 
   playerFormGroup: FormGroup = new FormGroup({
     firstname: this.firstname,
     lastname: this.lastname,
-    age: this.age,
     pposition: this.pposition,
     clubid: this.clubid,
     countryid: this.countryid,
-    image: this.image
+    image: this.image,
+    dob: this.dob
   });
 
   addPlayer(){
@@ -54,11 +72,11 @@ export class AddPlayerComponent {
       id: 0,
       firstname: this.firstname.value,
       lastname: this.lastname.value,
-      age: this.age.value,
       pposition: this.pposition.value,
       clubid: this.clubid.value,
       countryid: this.countryid.value,
       image: this.image.value,
+      dob: this.dob.value,
       flag: '',
       logo: '',
     }).subscribe({

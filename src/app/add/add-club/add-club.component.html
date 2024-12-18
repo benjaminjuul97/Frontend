@@ -1,34 +1,3 @@
-<!-- <div class="example-button-row">
-    <button mat-button routerLink="/club">←</button>
-</div>
-<div class="form-container">
-    <h1>Add Club</h1>
-<form [formGroup]="clubFormGroup">
-    <div class="form-grid">
-    <mat-form-field>
-        <mat-label>Club name</mat-label>
-        <input matInput type="text" [formControl]="cname">
-    </mat-form-field><br/>
-    <mat-form-field>
-        <mat-label>League ID</mat-label>
-        <input matInput type="text" [formControl]="leagueid">
-    </mat-form-field><br/>
-    <mat-form-field>
-        <mat-label>Manager ID</mat-label>
-        <input matInput type="text" [formControl]="managerid">
-    </mat-form-field><br/>
-    <mat-form-field>
-        <mat-label>Stadium ID</mat-label>
-        <input matInput type="text" [formControl]="stadiumid">
-    </mat-form-field><br/>
-    <mat-form-field>
-        <mat-label>Logo</mat-label>
-        <input matInput type="text" [formControl]="logo">
-    </mat-form-field><br/>
-    </div>
-    <button mat-raised-button color="primary" (click)="addClub()">Add Club</button>
-</form>
-</div> -->
 <div class="example-button-row">
     <button mat-button routerLink="/club">←</button>
 </div>
@@ -38,31 +7,60 @@
         <div class="form-grid">
             <mat-form-field>
                 <mat-label>Club name</mat-label>
-                <input matInput type="text" [formControl]="cname">
+                <input matInput type="text" [formControl]="cname" required>
+                @if (cname.errors?.['pattern']) {
+                    <mat-error>Not a valid club name</mat-error>
+                  }
             </mat-form-field>
             
             <mat-form-field>
                 <mat-label>League ID</mat-label>
-                <input matInput type="text" [formControl]="leagueid">
+                <input matInput type="text" [formControl]="leagueid" required pattern="\d+" minlength="1" max-length="2">
+                @if (leagueid.errors?.['required']) {
+                    <mat-error>League id is required</mat-error>
+                }
+                @if (leagueid.errors?.['pattern']) {
+                    <mat-error>Only digits</mat-error>
+                }
             </mat-form-field>
             
             <mat-form-field>
                 <mat-label>Manager ID</mat-label>
-                <input matInput type="text" [formControl]="managerid">
+                <input matInput type="text" [formControl]="managerid" required pattern="\d+" minlength="1" max-length="2">
+                @if (managerid.errors?.['required']) {
+                    <mat-error>Manager id is required</mat-error>
+                }
+                @if (managerid.errors?.['pattern']) {
+                    <mat-error>Only digits</mat-error>
+                }
             </mat-form-field>
             
             <mat-form-field>
                 <mat-label>Stadium ID</mat-label>
-                <input matInput type="text" [formControl]="stadiumid">
+                <input matInput type="text" [formControl]="stadiumid" required pattern="\d+" minlength="1" max-length="2">
+                @if (stadiumid.errors?.['required']) {
+                    <mat-error>Stadium id is required</mat-error>
+                }
+                @if (stadiumid.errors?.['pattern']) {
+                    <mat-error>Only digits</mat-error>
+                }
             </mat-form-field>
             
             <mat-form-field>
                 <mat-label>Logo</mat-label>
-                <input matInput type="text" [formControl]="logo">
+                <input matInput type="text" [formControl]="logo" required>
+                @if(logo.errors?.['pattern']) {
+                    <mat-error>Logo should be at least three characters and end on .svg</mat-error>
+                }
             </mat-form-field>
         </div>
+        @if(cname.invalid || leagueid.invalid || managerid.invalid || stadiumid.invalid) {
+            <mat-error>Error in data</mat-error>
+        }
+        @else {
         <div class="button-container">
             <button mat-raised-button color="primary" (click)="addClub()">Add Club</button>
         </div>
+        }
     </form>
 </div>

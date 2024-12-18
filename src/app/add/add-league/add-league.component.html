@@ -4,22 +4,39 @@
 <div class="form-container">
     <h1>Add League</h1>
 <form [formGroup]="leagueFormGroup">
-    <!-- <mat-form-field>
-        <mat-label>Id</mat-label>
-        <input matInput type="text" [formControl]="id">
-    </mat-form-field><br/> -->
+    <div class="form-grid">
     <mat-form-field>
         <mat-label>League name</mat-label>
-        <input matInput type="text" [formControl]="lname">
+        <input matInput type="text" [formControl]="lname" required>
+        @if (lname.invalid) {
+            <mat-error>Not a valid league name</mat-error>
+          }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Country ID</mat-label>
-        <input matInput type="text" [formControl]="countryid">
+        <input matInput type="text" [formControl]="countryid" required pattern="\d+" minlength="1" max-length="2">
+        @if (countryid.errors?.['required']) {
+            <mat-error>League id is required</mat-error>
+        }
+        @if (countryid.errors?.['pattern']) {
+            <mat-error>Only digits</mat-error>
+        }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Logo</mat-label>
         <input matInput type="text" [formControl]="logo">
+        @if(logo.errors?.['pattern']) {
+            <mat-error>Logo should be at least three characters and end on .svg</mat-error>
+        }
     </mat-form-field><br/>
-    <button mat-raised-button color="primary" color="primary" (click)="addLeague()">Add League</button>
+    </div>
+    @if(lname.invalid || countryid.invalid || logo.invalid) {
+        <mat-error>Error in data</mat-error>
+    }
+    @else {
+    <div class="button-container">
+        <button mat-raised-button color="primary" (click)="addLeague()">Add League</button>
+    </div>
+    }
 </form>
 </div>

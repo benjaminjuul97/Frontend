@@ -1,90 +1,71 @@
-<!-- <p>edit-club {{id}}</p>
-
-<div>
-    id: <input type="text" [(ngModel)]="club.id">
-</div>
-<div>
-    Club name: <input type="text" [(ngModel)]="club.cname" required #cname="ngModel">
-    @if(cname.invalid){
-        <span>Name must be provided</span>
-    }
-</div>
-<div>
-    League id: <input type="text" [(ngModel)]="club.leagueid" required pattern="\d+" minlength="1" maxlength="2" #leagueid="ngModel">
-    @if(leagueid.errors?.['required']){
-        <div>League id is required</div>
-    }
-    @if(leagueid.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-<div>
-    Manager id: <input type="text" [(ngModel)]="club.managerid" required pattern="\d+" minlength="1" maxlength="2" #managerid="ngModel">
-    @if(managerid.errors?.['required']){
-        <div>Manager id is required</div>
-    }
-    @if(managerid.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-<div>
-    Stadium id: <input type="text" [(ngModel)]="club.stadiumid" required pattern="\d+" minlength="1" maxlength="2" #stadiumid="ngModel">
-    @if(stadiumid.errors?.['required']){
-        <div>Stadium id is required</div>
-    }
-    @if(stadiumid.errors?.['pattern']){
-        <div>Only digits</div>
-    }
-</div>
-@if(cname.invalid || leagueid.invalid || managerid.invalid || stadiumid.invalid) {
-<button (click)="updateClub()">Update</button>
-} -->
 <div class="example-button-row">
   <button mat-stroked-button routerLink="/club">←</button>
 </div>
 <div class="form-container">
   <h1>Edit Club</h1>
-@if(club) {
-    <form #formEditClub="ngForm">
-    <mat-form-field>
-      <mat-label>Club ID</mat-label>
-      <input matInput [(ngModel)]="club.id" required #id="ngModel" name="id">
-    </mat-form-field>
-
+    <form [formGroup]="clubEditFormGroup">
+      <div class="form-grid">
     <mat-form-field>
       <mat-label>Club name</mat-label>
-      <input matInput [(ngModel)]="club.cname" required #cname="ngModel" name="cname">
-      @if(cname.invalid){
-        <span style="background-color: red;">Club name must be provided</span>
+      <input matInput type="text" [formControl]="cname" required [(ngModel)]="club.cname" name="cname">
+      @if(cname.errors?.['pattern']) {
+        <mat-error>Not a valid club name</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>League ID</mat-label>
-      <input matInput [(ngModel)]="club.leagueid" required #leagueid="ngModel" name="leagueid">
+      <input matInput type="text" [formControl]="leagueid" required [(ngModel)]="club.leagueid" name="leagueid" pattern="\d+" minlength="1" max-length="2">
+      @if(leagueid.errors?.['required']) {
+        <mat-error>League id is required</mat-error>
+      }
+      @if (leagueid.errors?.['pattern']) {
+        <mat-error>Only digits</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Manager ID</mat-label>
-      <input matInput [(ngModel)]="club.managerid" required #managerid="ngModel" name="managerid">
+      <input matInput type="text" [formControl]="managerid" required [(ngModel)]="club.managerid" name="managerid" pattern="\d+" minlength="1" max-length="2">
+      @if(managerid.errors?.['required']) {
+        <mat-error>Manager id is required</mat-error>
+      }
+      @if (managerid.errors?.['pattern']) {
+        <mat-error>Only digits</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Stadium ID</mat-label>
-      <input matInput [(ngModel)]="club.stadiumid" required #stadiumid="ngModel" name="stadiumid">
+      <input matInput type="text" [formControl]="stadiumid" required [(ngModel)]="club.stadiumid" name="stadiumid" pattern="\d+" minlength="1" max-length="2">
+      @if(stadiumid.errors?.['required']) {
+        <mat-error>Stadium id is required</mat-error>
+      }
+      @if (stadiumid.errors?.['pattern']) {
+        <mat-error>Only digits</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Logo</mat-label>
-      <input matInput [(ngModel)]="club.logo" required #logo="ngModel" name="logo">
+      <input matInput type="text" [formControl]="logo" required [(ngModel)]="club.logo" name="logo">
+      @if(logo.errors?.['pattern']) {
+        <mat-error>Logo should be at least three characters and end on .svg</mat-error>
+      }
     </mat-form-field>
-
+  </div>
+  @if(
+    cname.invalid
+    || leagueid.invalid
+    || managerid.invalid
+    || stadiumid.invalid
+    || logo.invalid) {
+      <mat-error>Error in data</mat-error>
+    }
+    @else {
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="updateClub()">Update Club</button>
+      </div>
+    }
 </form>
-@if(formEditClub.valid) {
-  <button mat-raised-button color="primary" (click)="updateClub()">Update Club</button>
-}
-}
-@else {
-  Loading...
-}
 </div>

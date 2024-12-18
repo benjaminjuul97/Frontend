@@ -19,27 +19,13 @@ export class AuthService {
       password: password
     });
    }
+
+   get isAuthenticated(): boolean {
+    return !!localStorage.getItem('headerValue'); // Checks if 'headerValue' exists in localStorage
+  }
+
+  logout(): void {
+    localStorage.removeItem('headerValue');
+  }
    
-  //  beforeEach(() => {
-  //   TestBed.configureTestingModule({
-  //     providers: [provideHttpClient()]
-  //   });
-  //   service = TestBed.inject(AuthService);
-  //  });
-
-  //  it('should return header', (done) => {
-  //   service.authenticate('john doe', 'VerySecret').subscribe(login => {
-  //     expect(login.headerValue).toBe('Basic am9obi5kb2U6VmVyeVNl3JldCE=')
-  //     done();
-  //   });
-  //  })
-
-  //  it('should NOT return header', (done) => {
-  //   service.authenticate('wrong', 'password').subscribe({
-  //     error: (err) => {
-  //       expect(err).toBeTruthy()
-  //       done();
-  //     }
-  //  });
-  // })
 }

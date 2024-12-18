@@ -3,10 +3,10 @@ export interface Player {
     firstname: string;
     lastname: string;
     pposition: string;
-    age: number;
     clubid: number;
     countryid: number;
     image: string;
+    dob: Date;
     flag: string;
     logo: string;
 }

@@ -4,17 +4,19 @@
 <div class="form-container">
     <h1>Add Country</h1>
 <form [formGroup]="countryFormGroup">
-    <!-- <mat-form-field>
-        <mat-label>Id</mat-label>
-        <input matInput type="text" [formControl]="id">
-    </mat-form-field><br/> -->
     <mat-form-field>
         <mat-label>Country name</mat-label>
-        <input matInput type="text" [formControl]="cname">
+        <input matInput type="text" [formControl]="cname" required>
+        @if (cname.invalid) {
+            <mat-error>Not a valid country name</mat-error>
+          }
     </mat-form-field><br/>
     <mat-form-field>
         <mat-label>Flag</mat-label>
-        <input matInput type="text" [formControl]="flag">
+        <input matInput type="text" [formControl]="flag" required>
+        @if(flag.errors?.['pattern']) {
+            <mat-error>Flag should be at least three characters end on .svg</mat-error>
+        }
     </mat-form-field><br/>
     <button mat-raised-button (click)="addCountry()">Add Country</button>
 </form>
