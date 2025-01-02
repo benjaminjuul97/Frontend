@@ -1,71 +1,28 @@
 @if(authenticated) {
-  <mat-tab-group disableRipple>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <a routerLink="/player" class="tab-link">
-            <i class="fa-solid fa-user"></i>
-          <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
-          Players
-        </a>
-      </ng-template>
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <a routerLink="/club" class="tab-link">
-          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-          Clubs
-        </a>
-      </ng-template>
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <a routerLink="/league" class="tab-link">
-          <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
-          <i class="fa-regular fa-futbol"></i>
-          Leagues
-        </a>
-      </ng-template>
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <a routerLink="/manager" class="tab-link">
-            <i class="fa-solid fa-user-tie"></i>
-          <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
-          Manager
-        </a>
-      </ng-template>
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <a routerLink="/stadium" class="tab-link">
-          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-          Stadium
-        </a>
-      </ng-template>
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <a routerLink="/transfer" class="tab-link">
-          <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
-          <i class="fa-solid fa-arrow-right-arrow-left"></i>
-          Transfer
-        </a>
-      </ng-template>    
-    </mat-tab>
-  </mat-tab-group>
-  
-
- <!-- Logout button -->
- <button mat-raised-button color="warn" (click)="logout()" class="logout-button">
-  Logout
-</button>
-} @else {
-<span style="color: red; font-size: 18px;">You are not authenticated. Please log in.</span>
+<div class="nav-container">
+  <!-- Navigation Links -->
+  <a mat-button [routerLink]="'/player'" routerLinkActive="active" class="tab-link">
+    <span>Players</span>
+  </a>
+  <a mat-button [routerLink]="'/club'" routerLinkActive="active" class="tab-link">
+    <span>Clubs</span>
+  </a>
+  <a mat-button [routerLink]="'/league'" routerLinkActive="active" class="tab-link">
+    <span>Leagues</span>
+  </a>
+  <a mat-button [routerLink]="'/manager'" routerLinkActive="active" class="tab-link">
+    <span>Managers</span>
+  </a>
+  <a mat-button [routerLink]="'/stadium'" routerLinkActive="active" class="tab-link">
+    <span>Stadiums</span>
+  </a>
+</div>
+<div class="logout-container">
+  <button mat-raised-button color="warn" (click)="logout()" class="logout-button">
+    Logout
+  </button>
+</div>
 }
-<router-outlet/>
-
+<div class="app-container">
+  <router-outlet></router-outlet>
+</div>

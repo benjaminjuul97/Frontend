@@ -23,9 +23,9 @@ import { MatButtonModule } from '@angular/material/button';
 export class StadiumListComponent implements OnInit {
 
   stadiums: Stadium[] = [];
-  pagedStadiums: Stadium[] = []; // Specify type as Player[]
-  pageSize = 4; // Default page size
-  currentPage = 0; // Current page index
+  pagedStadiums: Stadium[] = [];
+  pageSize = 4;
+  currentPage = 0; 
 
   constructor(private stadiumService: StadiumService, private router: Router) { }
 

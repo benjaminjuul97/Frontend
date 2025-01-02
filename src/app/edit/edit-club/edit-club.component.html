@@ -1,8 +1,10 @@
-<div class="example-button-row">
+<div class="row">
   <button mat-stroked-button routerLink="/club">←</button>
 </div>
+<h1>Edit Club</h1>
 <div class="form-container">
-  <h1>Edit Club</h1>
+  <img mat-card-image [src]="'assets/svg/' + club.logo" alt="{{ club.logo }}" class="club-image" />
+  <p style="text-align: center;">Edit club with club id <span><b>{{club.id}}</b></span></p>
     <form [formGroup]="clubEditFormGroup">
       <div class="form-grid">
     <mat-form-field>

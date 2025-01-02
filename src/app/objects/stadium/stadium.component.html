@@ -1,6 +1,6 @@
-<mat-card class="example-card" appearance="outlined">
+<mat-card class="card" appearance="outlined">
     <div class="top-right-actions">
-      <span (click)="deleteStadium()" class="action-icon delete-icon">
+      <span (click)="openDialog(deleteDialog)" class="action-icon delete-icon">
         <i class="fa-solid fa-trash-can"></i>
       </span>
       <span (click)="editStadium(stadium.id)" class="action-icon edit-icon">
@@ -13,14 +13,51 @@
     </div>
   
     <mat-card-content>
-      <p>{{stadium.sname}}</p>
-      <p>{{stadium.slocation}}</p>
-      <p>{{stadium.capacity}}</p>
+      <mat-list>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>Stadium name:</span>
+          <span matListItemLine>{{stadium.sname}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>Location:</span>
+          <span matListItemLine>{{stadium.slocation}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>Capacity:</span>
+          <span matListItemLine>{{stadium.capacity}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>Club:</span>
+          <span matListItemLine><img style="height: 30px" [src]="'assets/svg/' + stadium.logo" alt="{{ stadium.logo }}"></span>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </mat-card-content>
   
-    <mat-card-actions>
-      <!-- <button mat-button>Club: <img style="height: 30px" [src]="'assets/svg/' + stadium.logo" alt="{{ stadium.logo }}"></button> -->
-      <!-- <button mat-button>Country: <img style="height: 30px" [src]="'assets/svg/' + stadium.flag" alt="{{ stadium.flag }}"></button> -->
-    </mat-card-actions>
   </mat-card>
+
+  <!-- Dialog Content -->
+<ng-template #deleteDialog>
+  <h1 mat-dialog-title>Confirm Delete</h1>
+  <div mat-dialog-content>
+    <p>Are you sure you want to delete <span><b>{{ stadium.sname }}</b></span>?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-button color="warn" (click)="confirmDelete()">
+      <i class="fa-solid fa-trash-can"></i>
+      Delete
+    </button>
+  </div>
+</ng-template>
   

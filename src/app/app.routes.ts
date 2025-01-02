@@ -21,9 +21,10 @@ import { AddTransferComponent } from './add/add-transfer/add-transfer.component'
 
 export const routes: Routes = [
     { path: 'player', component: PlayerListComponent },
+    { path: '', component: PlayerListComponent }, // '' redirets to player page
     { path: 'add-player', component: AddPlayerComponent},
     { path: 'edit-player/:id', component: EditPlayerComponent},
-    // { path: '', component: PlayerListComponent },
+    { path: 'player', component: PlayerListComponent },
     { path: 'club', component: ClubListComponent},
     { path: 'add-club', component: AddClubComponent},
     { path: 'edit-club/:id', component: EditClubComponent},

@@ -1,4 +1,4 @@
-import { Component, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, Input, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from '@angular/core';
 import { Player } from '../../model/player';
 import { PlayerService } from '../../services/player.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 
 @Component({
@@ -22,6 +24,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     MatCardModule, 
     MatButtonModule,
+    MatListModule,
+    MatDialogModule,
     FormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
@@ -32,16 +36,28 @@ import { CommonModule } from '@angular/common';
   ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PlayerComponent {
 
   @Input() player!: Player;
+  dialogRef!: MatDialogRef<any>;
 
-  constructor(private playerService: PlayerService, private router: Router) { }
+  currentDate = new Date();
 
-  deletePlayer() {
-    this.playerService.deletePlayer(this.player.id).subscribe();
+  constructor(private playerService: PlayerService, private router: Router, private dialog: MatDialog) { }
+
+  openDialog(templateRef: TemplateRef<any>): void {
+    this.dialogRef = this.dialog.open(templateRef, {
+      width: '300px',
+    });
+  }
+
+  confirmDelete(): void {
+    this.playerService.deletePlayer(this.player.id).subscribe(() => {
+      console.log('Player deleted');
+      this.dialogRef.close();
+    });
   }
 
   editPlayer(id: number) {

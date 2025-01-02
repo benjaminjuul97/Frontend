@@ -37,6 +37,7 @@ export class LeagueListComponent implements OnInit {
     this.leagueService.getLeagues().subscribe(listOfLeagues => {
       this.leagues = listOfLeagues;
       console.log("leagues", this.leagues)
+      this.updatePagedLeagues();
     });
   }
 

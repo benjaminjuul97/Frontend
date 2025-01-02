@@ -7,6 +7,7 @@ import { StadiumService } from '../../services/stadium.service';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-stadium',
@@ -15,7 +16,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
-    MatSelectModule, 
+    MatSelectModule,
+    MatButtonModule, 
     RouterModule
   ],
   templateUrl: './edit-stadium.component.html',
@@ -43,10 +45,15 @@ export class EditStadiumComponent implements OnInit {
     });
 
   ngOnInit(): void {
+    if(this.stadiumService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    } else {
     this.stadiumService.getStadium(this.id).subscribe(stadium => {
       this.stadium = stadium;
     });
   }
+}
 
   updateStadium() {
     this.stadiumService.updateStadium(this.stadium!).subscribe();

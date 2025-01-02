@@ -1,4 +1,4 @@
-<div class="example-button-row">
+<div class="row">
     <button mat-button routerLink="/club">←</button>
 </div>
 <div class="form-container">
@@ -54,7 +54,7 @@
                 }
             </mat-form-field>
         </div>
-        @if(cname.invalid || leagueid.invalid || managerid.invalid || stadiumid.invalid) {
+        @if(cname.invalid || leagueid.invalid || managerid.invalid || stadiumid.invalid || logo.invalid) {
             <mat-error>Error in data</mat-error>
         }
         @else {

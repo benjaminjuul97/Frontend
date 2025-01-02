@@ -24,9 +24,15 @@ export class EditCountryComponent implements OnInit {
   constructor(private countryService: CountryService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.countryService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    } else {
     this.countryService.getCountry(this.id).subscribe(country => {
       this.country = country;
     });
+
+  }
   }
 
   updateCountry() {

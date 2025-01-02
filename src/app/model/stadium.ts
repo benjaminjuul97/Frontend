@@ -5,4 +5,5 @@ export interface Stadium {
     capacity: number;
     clubid: number;
     image: string;
+    logo: string;
 }

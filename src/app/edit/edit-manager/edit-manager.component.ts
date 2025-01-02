@@ -67,9 +67,14 @@ export class EditManagerComponent implements OnInit {
     });
 
   ngOnInit(): void {
+    if(this.managerService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    } else {
     this.managerService.getManager(this.id).subscribe(manager => {
       this.manager = manager;
     });
+  }
   }
 
   updateManager() {

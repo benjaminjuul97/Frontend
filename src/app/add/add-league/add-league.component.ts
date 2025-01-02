@@ -21,7 +21,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class AddLeagueComponent {
 
-  constructor(private leagueService: LeagueService, private router: RouterModule) {}
+  constructor(private leagueService: LeagueService, private router: Router) {}
 
   lname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
   countryid: FormControl = new FormControl('', [Validators.required]);
@@ -34,6 +34,13 @@ export class AddLeagueComponent {
     logo: this.logo.value
   });
 
+  ngOnInit(): void {
+    if(this.leagueService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    }
+  }
+
   addLeague(){
     //  if(!this.leagueFormGroup.valid) {
     //    console.log("Data not valid");
@@ -45,11 +52,13 @@ export class AddLeagueComponent {
       id: 0,
       lname: this.lname.value,
       countryid: this.countryid.value,
-      logo: this.logo.value
+      logo: this.logo.value,
+      flag: ''
     }).subscribe({
       next: () => console.log("Done"),
       error: (err) => console.error("Something went wrong: " + err)
     })
+    this.router.navigate(['league']);
   }
 
 }

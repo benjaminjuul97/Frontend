@@ -34,7 +34,7 @@ export class PlayerListComponent implements OnInit {
       this.router.navigate(["login"]);
       return;
     }
-    this.playerService.getPlayers().subscribe((listOfPlayers) => {
+    this.playerService.getPlayers().subscribe(listOfPlayers => {
       this.players = listOfPlayers;
       console.log("players", this.players);
       this.updatePagedPlayers();

@@ -1,8 +1,10 @@
-<div class="example-button-row">
+<div class="row">
     <button mat-button routerLink="/manager">←</button>
 </div>
+<h1>Edit Manager</h1>
 <div class="form-container">
-    <h1>Edit Manager</h1>
+  <img mat-card-image [src]="'assets/img/' + manager.image" alt="{{ manager.image }}" class="manager-image" />
+  <p style="text-align: center;">Edit manager with manager id <span><b>{{manager.id}}</b></span></p>
     <form [formGroup]="managerEditFormGroup">
       <div class="form-grid">
     <mat-form-field>

@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { StadiumService } from '../../services/stadium.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-add-stadium',
@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AddStadiumComponent {
 
-  constructor(private stadiumService: StadiumService, private router: RouterModule) {}
+  constructor(private stadiumService: StadiumService, private router: Router) {}
 
   sname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
   slocation: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
@@ -36,6 +36,14 @@ export class AddStadiumComponent {
     image: this.image.value,
   });
 
+  ngOnInit(): void {
+    if(this.stadiumService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    }
+  } 
+
+
   addStadium(){
     //  if(!this.stadiumFormGroup.valid) {
     //    console.log("Data not valid");
@@ -49,11 +57,13 @@ export class AddStadiumComponent {
       slocation: this.slocation.value,
       capacity: this.capacity.value,
       clubid: this.clubid.value,
-      image: this.image.value
+      image: this.image.value,
+      logo: ''
     }).subscribe({
       next: () => console.log("Done"),
       error: (err) => console.error("Something went wrong: " + err)
     })
+    this.router.navigate(['stadium']);
   }
 
 }

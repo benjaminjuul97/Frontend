@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-club',
@@ -15,7 +16,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
-    MatSelectModule, 
+    MatSelectModule,
+    MatButtonModule, 
     RouterModule],
   templateUrl: './edit-club.component.html',
   styleUrl: './edit-club.component.css'
@@ -43,9 +45,15 @@ export class EditClubComponent implements OnInit {
     });
 
   ngOnInit(): void {
+    if(this.clubService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    }
+    else {
     this.clubService.getClub(this.id).subscribe(club => {
       this.club = club;
     });
+  }
   }
 
   updateClub() {

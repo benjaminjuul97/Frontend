@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TransferService } from '../../services/transfer.service';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -24,7 +24,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AddTransferComponent {
 
-  constructor(private transferService: TransferService) {}
+  constructor(private transferService: TransferService, private router: Router) {}
 
   transferfee: FormControl = new FormControl('', [Validators.required]);
   transferdate: FormControl = new FormControl('', [Validators.required]);
@@ -43,6 +43,13 @@ export class AddTransferComponent {
     playerid: this.playerid.value,
     loan: this.loan.value
   });
+
+  ngOnInit(): void {
+    if(this.transferService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+   } 
+  }
 
   addTransfer(){
      if(!this.transferFormGroup.valid) {
@@ -63,6 +70,7 @@ export class AddTransferComponent {
       next: () => console.log("Done"),
       error: (err) => console.error("Something went wrong: " + err)
     })
+    this.router.navigate(['transfer']);
   }
 
 }

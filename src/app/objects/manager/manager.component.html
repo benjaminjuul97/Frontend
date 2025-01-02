@@ -1,6 +1,6 @@
-<mat-card class="example-card" appearance="outlined">
+<mat-card class="card" appearance="outlined">
   <div class="top-right-actions">
-    <span (click)="deleteManager()" class="action-icon delete-icon">
+    <span (click)="openDialog(deleteDialog)" class="action-icon delete-icon">
       <i class="fa-solid fa-trash-can"></i>
     </span>
     <span (click)="editManager(manager.id)" class="action-icon edit-icon">
@@ -12,14 +12,50 @@
     <img mat-card-image [src]="'assets/img/' + manager.image" alt="{{ manager.image }}" />
   </div>
 
-  <mat-card-content>
-    <p>{{manager.firstname}} {{manager.lastname}}</p>
-    <!-- <p>{{manager.age}}</p> -->
-    <p>{{manager.dob}}</p>
+  <mat-card-content class="content-container">
+    <mat-list>
+      <mat-list-item>
+        <div class="list-content">
+          <span matListItemTitle>Manager name:</span>
+          <span matListItemLine>{{manager.firstname}} {{manager.lastname}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+          <span matListItemTitle>Date of birth:</span>
+          <span matListItemLine>{{manager.dob | date:'dd.MM.yyyy'}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+          <span matListItemTitle>Club:</span>
+          <span matListItemLine><img style="height: 30px" [src]="'assets/svg/' + manager.logo" alt="{{ manager.logo }}"></span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+          <span matListItemTitle>Country:</span>
+          <span matListItemLine><img style="height: 30px" [src]="'assets/svg/' + manager.flag" alt="{{ manager.flag }}"></span>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-button>Club: <img style="height: 30px" [src]="'assets/svg/' + manager.clubid" alt="{{ manager.clubid }}"></button>
-    <button mat-button>Country: <img style="height: 30px" [src]="'assets/svg/' + manager.countryid" alt="{{ manager.countryid }}"></button>
-  </mat-card-actions>
 </mat-card>
+
+<!-- Dialog Content -->
+<ng-template #deleteDialog>
+  <h1 mat-dialog-title>Confirm Delete</h1>
+  <div mat-dialog-content>
+    <p>Are you sure you want to delete <span><b>{{ manager.firstname }} {{ manager.lastname }}</b></span>?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-button color="warn" (click)="confirmDelete()">
+      <i class="fa-solid fa-trash-can"></i>
+      Delete
+    </button>
+  </div>
+</ng-template>

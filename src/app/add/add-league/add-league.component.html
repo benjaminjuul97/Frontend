@@ -1,4 +1,4 @@
-<div class="example-button-row">
+<div class="row">
     <button mat-button routerLink="/league">←</button>
 </div>
 <div class="form-container">
@@ -11,7 +11,7 @@
         @if (lname.invalid) {
             <mat-error>Not a valid league name</mat-error>
           }
-    </mat-form-field><br/>
+    </mat-form-field>
     <mat-form-field>
         <mat-label>Country ID</mat-label>
         <input matInput type="text" [formControl]="countryid" required pattern="\d+" minlength="1" max-length="2">
@@ -21,14 +21,14 @@
         @if (countryid.errors?.['pattern']) {
             <mat-error>Only digits</mat-error>
         }
-    </mat-form-field><br/>
+    </mat-form-field>
     <mat-form-field>
         <mat-label>Logo</mat-label>
         <input matInput type="text" [formControl]="logo">
         @if(logo.errors?.['pattern']) {
             <mat-error>Logo should be at least three characters and end on .svg</mat-error>
         }
-    </mat-form-field><br/>
+    </mat-form-field>
     </div>
     @if(lname.invalid || countryid.invalid || logo.invalid) {
         <mat-error>Error in data</mat-error>

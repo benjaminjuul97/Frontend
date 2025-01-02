@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet, RouterModule } from '@angular/router';
 import { PlayerComponent } from './objects/player/player.component';
 import { PlayerListComponent } from './lists/player-list/player-list.component';
 import { ClubComponent } from './objects/club/club.component';
@@ -29,6 +29,7 @@ import { AuthService } from './services/auth.service';
   imports: [
     RouterOutlet,
     RouterLink, 
+    RouterModule,
     PlayerComponent, 
     PlayerListComponent,
     ClubComponent,

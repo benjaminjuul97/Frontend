@@ -1,6 +1,6 @@
-<mat-card class="example-card" appearance="outlined">
+<mat-card class="card" appearance="outlined">
   <div class="top-right-actions">
-    <span (click)="deletePlayer()" class="action-icon delete-icon">
+      <span (click)="openDialog(deleteDialog)" class="action-icon delete-icon">
       <i class="fa-solid fa-trash-can"></i>
     </span>
     <span (click)="editPlayer(player.id)" class="action-icon edit-icon">
@@ -9,18 +9,61 @@
   </div>
 
   <div class="image-container">
-    <img mat-card-image [src]="'assets/img/' + player.image" alt="{{ player.image }}" />
+    <img mat-card-image [src]="'assets/img/' + player.image" alt="{{ player.image }}" class="player-image"/>
   </div>
 
   <mat-card-content>
-    <p>{{player.firstname}} {{player.lastname}}</p>
-    <!-- <p>{{player.age}}</p> -->
-    <p>{{player.dob}}</p>
-    <p>{{player.pposition}}</p>
+    <mat-list>
+      <mat-list-item>
+        <div class="list-content">
+        <span matListItemTitle>Player name:</span>
+        <span matListItemLine>{{player.firstname}} {{player.lastname}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+        <span matListItemTitle>Date of birth:</span>
+        <span matListItemLine>{{ player.dob | date:'dd.MM.yyyy' }}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+        <span matListItemTitle>Position:</span>
+        <span matListItemLine>{{player.pposition}}</span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+        <span matListItemTitle>Club:</span>
+        <span matListItemLine><img style="height: 30px" [src]="'assets/svg/' + player.logo" alt="{{ player.logo }}"></span>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="list-content">
+        <span matListItemTitle>Country:</span>
+        <span matListItemLine><img style="height: 30px" [src]="'assets/svg/' + player.flag" alt="{{ player.flag }}"></span>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-button>Club: <img style="height: 30px" [src]="'assets/svg/' + player.logo" alt="{{ player.logo }}"></button>
-    <button mat-button>Country: <img style="height: 30px" [src]="'assets/svg/' + player.flag" alt="{{ player.flag }}"></button>
-  </mat-card-actions>
 </mat-card>
+
+<!-- Dialog Content -->
+<ng-template #deleteDialog>
+  <h1 mat-dialog-title>Confirm Delete</h1>
+  <div mat-dialog-content>
+    <p>Are you sure you want to delete <span><b>{{ player.firstname }} {{player.lastname}}</b></span>?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-button color="warn" (click)="confirmDelete()">
+      <i class="fa-solid fa-trash-can"></i>
+      Delete
+    </button>
+  </div>
+</ng-template>
+

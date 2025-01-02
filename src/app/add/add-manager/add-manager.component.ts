@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { ManagerService } from '../../services/manager.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-add-manager',
@@ -39,7 +39,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AddManagerComponent {
 
-  constructor(private managerService: ManagerService) {}
+  constructor(private managerService: ManagerService, private router: Router) {}
 
   firstname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')
   ]);
@@ -56,8 +56,15 @@ export class AddManagerComponent {
     countryid: this.countryid.value,
     clubid: this.clubid.value,
     image: this.image.value,
-    dob: this.dob.value
+    dob: this.dob.value,
   });
+
+  ngOnInit(): void {
+    if(this.managerService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    } 
+  }
 
   addManager(){
     this.managerService.createManager({
@@ -68,9 +75,12 @@ export class AddManagerComponent {
       clubid: this.clubid.value,
       image: this.image.value,
       dob: this.dob.value,
+      flag: '',
+      logo: ''
     }).subscribe({
       next: () => console.log("Done"),
       error: (err) => console.error("Something went wrong: " + err)
     })
+    this.router.navigate(['manager']);
   }
 }

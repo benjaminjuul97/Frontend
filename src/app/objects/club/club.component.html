@@ -1,6 +1,6 @@
-  <mat-card class="example-card" appearance="outlined">
+  <mat-card class="card" appearance="outlined">
     <div class="top-right-actions">
-      <span (click)="deleteClub()" class="action-icon delete-icon"> 
+      <span (click)="openDialog(deleteDialog)" class="action-icon delete-icon"> 
         <i class="fa-solid fa-trash-can"></i>
       </span>
       <span (click)="editClub(club.id)" class="action-icon edit-icon">
@@ -13,26 +13,43 @@
     </div>
   
     <mat-card-content>
-      <p>{{club.leagueid}} {{club.managerid}}</p>
-      <p>{{club.stadiumid}}</p>
-      <!-- <p>{{player.pposition}}</p> -->
+      <mat-list>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>Club name:</span>
+          <span matListItemLine>{{club.cname}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>Manager:</span>
+          <span matListItemLine>{{club.managerFirstname}} {{club.managerLastname}}</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="list-content">
+          <span matListItemTitle>League:</span>
+          <span matListItemLine><img style="height: 30px" [src]="'assets/svg/' + club.leagueLogo" alt="{{ club.leagueLogo }}"></span>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </mat-card-content>
-  
-    <mat-card-actions>
-      <!-- <button mat-button>Club: <img style="height: 30px" [src]="'assets/svg/' + player.logo" alt="{{ player.logo }}"></button> -->
-      <!-- <button mat-button>Country: <img style="height: 30px" [src]="'assets/svg/' + player.flag" alt="{{ player.flag }}"></button> -->
-    </mat-card-actions>
   </mat-card>
   
 
-  <!-- Modal Template -->
+<!-- Dialog Content -->
 <ng-template #deleteDialog>
-  <h2 mat-dialog-title>Confirm Deletion</h2>
-  <mat-dialog-content>
-    <p>Are you sure you want to delete this club?</p>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button (click)="closeDialog()">Cancel</button>
-    <button mat-raised-button color="warn" (click)="confirmDelete()">Delete</button>
-  </mat-dialog-actions>
+  <h1 mat-dialog-title>Confirm Delete</h1>
+  <div mat-dialog-content>
+    <p>Are you sure you want to delete <span><b>{{ club.cname }}</b></span>?</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()">Cancel</button>
+    <button mat-button color="warn" (click)="confirmDelete()">
+      <i class="fa-solid fa-trash-can"></i>
+      Delete
+    </button>
+  </div>
 </ng-template>

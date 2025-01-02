@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +7,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { PlayerService } from '../../services/player.service';
 import { MatIcon } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -41,7 +41,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AddPlayerComponent {
 
-  constructor(private playerService: PlayerService) {}
+  constructor(private playerService: PlayerService, private router: Router) {}
 
   firstname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')]);
   lastname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z]+$')]);
@@ -60,6 +60,13 @@ export class AddPlayerComponent {
     image: this.image,
     dob: this.dob
   });
+
+  ngOnInit(): void {
+    if(this.playerService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    }
+  }
 
   addPlayer(){
      if(!this.playerFormGroup.valid) {
@@ -83,6 +90,7 @@ export class AddPlayerComponent {
       next: () => console.log("Done"),
       error: (err) => console.error("Something went wrong: " + err)
     })
+    this.router.navigate(['player']);
   }
 
 }

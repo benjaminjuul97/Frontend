@@ -68,11 +68,17 @@ export class EditPlayerComponent implements OnInit {
       dob: this.dob
     });
   
-  
+
+    
   ngOnInit(): void {
+    if(this.playerService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    } else {
     this.playerService.getPlayer(this.id).subscribe(player => {
       this.player = player;
     });
+  }
   }
 
   updatePlayer() {

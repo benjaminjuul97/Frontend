@@ -8,6 +8,7 @@ import { MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatInputModule, 
     MatSelectModule,
     MatSlideToggleModule,
-    MatLabel],
+    MatLabel,
+    MatButtonModule, ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

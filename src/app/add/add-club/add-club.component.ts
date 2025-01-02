@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AddClubComponent {
 
-  constructor(private clubService: ClubService) {}
+  constructor(private clubService: ClubService, private router: Router) {}
 
   cname: FormControl = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9\\s]+$')]);
   leagueid: FormControl = new FormControl('', [Validators.required]);
@@ -38,6 +38,13 @@ export class AddClubComponent {
     logo: this.logo.value,
   });
 
+  ngOnInit(): void {
+    if(this.clubService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    }
+  }
+
   addClub(){
     //  if(!this.clubFormGroup.valid) {
     //    console.log("Data not valid");
@@ -51,11 +58,15 @@ export class AddClubComponent {
       leagueid: this.leagueid.value,
       managerid: this.managerid.value,
       stadiumid: this.stadiumid.value,
-      logo: this.logo.value
+      logo: this.logo.value,
+      managerFirstname: '',
+      managerLastname: '',
+      leagueLogo: ''
     }).subscribe({
       next: () => console.log("Done"),
       error: (err) => console.error("Something went wrong: " + err)
     })
+    this.router.navigate(['club']);
   }
 
 }

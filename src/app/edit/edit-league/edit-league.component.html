@@ -1,8 +1,10 @@
-<div class="example-button-row">
+<div class="row">
   <button mat-button routerLink="/league">←</button>
 </div>
+<h1>Edit League</h1>
 <div class="form-container">
-  <h1>Edit League</h1>
+  <img mat-card-image [src]="'assets/svg/' + league.logo" alt="{{ league.logo }}" class="league-image" />
+  <p style="text-align: center;">Edit league with league id <span><b>{{league.id}}</b></span></p>
     <form [formGroup]="leagueEditFormGroup">
       <div class="form-grid">
     <mat-form-field>

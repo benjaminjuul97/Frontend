@@ -6,4 +6,6 @@ export interface Manager {
     clubid: number
     image: string;
     dob: Date;
+    flag: string;
+    logo: string;
 }

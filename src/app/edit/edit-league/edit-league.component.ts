@@ -8,6 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-league',
@@ -18,6 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatInputModule, 
     MatSelectModule,
     MatLabel,
+    MatButtonModule,
     RouterModule
   ],
   templateUrl: './edit-league.component.html',
@@ -42,10 +44,15 @@ export class EditLeagueComponent implements OnInit {
     });
 
   ngOnInit(): void {
+    if(this.leagueService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    }
     this.leagueService.getLeague(this.id).subscribe(league => {
       this.league = league;
     });
   }
+  
 
   updateLeague() {
     this.leagueService.updateLeague(this.league!).subscribe();

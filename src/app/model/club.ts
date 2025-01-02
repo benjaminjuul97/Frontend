@@ -5,4 +5,7 @@ export interface Club {
     managerid: number;
     stadiumid: number;
     logo: string;
+    managerFirstname: string;
+    managerLastname: string;
+    leagueLogo: string;
 }

@@ -33,9 +33,14 @@ export class EditTransferComponent implements OnInit {
   constructor(private transferService: TransferService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.transferService.authHeader == null){
+      this.router.navigate(["login"]);
+      return;
+    } else {
     this.transferService.getTransfer(this.id).subscribe(transfer => {
       this.transfer = transfer;
     });
+  }
   }
 
   updateTransfer() {
